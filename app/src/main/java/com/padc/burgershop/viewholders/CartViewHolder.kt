@@ -24,8 +24,8 @@ BaseViewHolder<BurgerVO>(itemView){
         itemView.tvBurgerName.text=data.burgerName
         itemView.tvBurgerDescription.text=data.burgerDescription
 
-        Glide.with(itemView.ivCardBurger)
+        Glide.with(itemView.ivBurger)
             .load(data.burgerImageUrl)
-            .into(itemView.ivCardBurger)
+            .into(itemView.ivBurger)
     }
 }

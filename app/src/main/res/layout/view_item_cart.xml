@@ -15,7 +15,7 @@
         app:cardCornerRadius="@dimen/margin_medium">
 
         <ImageView
-            android:id="@+id/ivCardBurger"
+            android:id="@+id/ivBurger"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"

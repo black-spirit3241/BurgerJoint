@@ -1,5 +1,7 @@
 package com.padc.burgershop.mvp.presenters.impl
 
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.padc.burgershop.data.model.impl.BurgerModelImpl
@@ -16,13 +18,13 @@ class MainPresenterImpl : BaseAppPresenterImpl<MainView>(),MainPresenter{
         mView.navigateToCartScreen()
     }
 
-    override fun onTapBurger(burger: BurgerVO) {
-        mView.navigateToDetailScreen(burger.burgerId)
+    override fun onTapBurger(burger: BurgerVO,burgerImageView: ImageView,burgerName : TextView) {
+        mView.navigateToDetailScreen(burger.burgerId,burgerImageView,burgerName)
     }
 
-    override fun onTapAddToCart(burger: BurgerVO) {
+    override fun onTapAddToCart(burger: BurgerVO,burgerImageView: ImageView) {
         mBurgerModel.addItemToCart(burger)
-        mView.addBurgerToCart(burger)
+        mView.addBurgerToCart(burger,burgerImageView)
     }
 
 
@@ -34,7 +36,7 @@ class MainPresenterImpl : BaseAppPresenterImpl<MainView>(),MainPresenter{
 
         mBurgerModel.getBurgersInCart()
             .observe(owner, Observer {
-                mView.dispalyCountInCart(it.count())
+                mView.displayCountInCart(it.count())
             })
     }
 }

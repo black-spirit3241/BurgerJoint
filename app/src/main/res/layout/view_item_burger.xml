@@ -16,10 +16,11 @@
         app:cardCornerRadius="@dimen/margin_medium">
 
             <ImageView
-                android:id="@+id/ivCardBurger"
+                android:id="@+id/ivBurger"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
+                android:transitionName="tBurgerImage"
                 android:src="@drawable/burgers"/>
     </com.google.android.material.card.MaterialCardView>
 
@@ -41,7 +42,8 @@
             android:textColor="@color/primaryText"
             android:text="Chicken Burger"
             android:textSize="@dimen/text_regular_2x"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:transitionName="tBurgerName"/>
 
         <TextView
             android:id="@+id/tvBurgerDescription"

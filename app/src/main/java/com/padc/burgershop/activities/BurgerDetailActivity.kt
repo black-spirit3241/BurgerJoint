@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
 import com.padc.burgershop.R
 import com.padc.burgershop.data.vos.BurgerVO
@@ -31,6 +32,24 @@ class BurgerDetailActivity : BaseActivity() ,BurgerDetailView{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_burger_detail)
         setUpPresenter()
+        setUpListeners()
+
+        val burgerId = intent.getIntExtra(EXTRA_BURGER_ID, 0)
+        mPresenter.onBurgerDetailsUiReady(this, burgerId)
+    }
+
+    private fun setUpListeners(){
+        ivBurger.setOnClickListener{
+            val animator=AnimationUtils.loadAnimation(this,R.anim.rotate)
+            ivBurger.startAnimation(animator)
+        }
+
+        fab.setOnClickListener{
+           val animator= AnimationUtils.loadAnimation(this,R.anim.rotate)
+            animator.repeatCount=3
+            animator.duration=900
+            fab.startAnimation(animator)
+        }
     }
 
     override fun displayBurgerDetails(burger: BurgerVO) {

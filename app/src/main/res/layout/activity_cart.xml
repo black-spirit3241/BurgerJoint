@@ -60,7 +60,7 @@
         android:layout_height="150dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryDark"
-        android:visibility="gone">
+        android:visibility="invisible">
 
         <TextView
             android:layout_width="wrap_content"
