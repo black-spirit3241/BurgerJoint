@@ -6,7 +6,10 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Fade
 import android.view.View
+import android.view.Window
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityOptionsCompat
@@ -31,13 +34,24 @@ class MainActivity :BaseActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        setUpTransitions()
+        setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setUpPresenter()
         setUpRecycler()
         setUpListeners()
         mPresenter.onUIReady(this)
+    }
+
+    private fun setUpTransitions(){
+        with(window){
+            requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+            val animation= Fade()
+            animation.duration=500
+            animation.interpolator=AccelerateDecelerateInterpolator()
+            exitTransition=animation
+        }
     }
 
     private fun setUpPresenter(){
@@ -47,6 +61,10 @@ class MainActivity :BaseActivity(), MainView {
     private fun setUpListeners(){
         ivCart.setOnClickListener{
             mPresenter.onTapCart()
+        }
+
+        tvPlayGame.setOnClickListener{
+            startActivity(GameActivity.newIntent(this))
         }
     }
 
@@ -68,7 +86,8 @@ class MainActivity :BaseActivity(), MainView {
     }
 
     override fun navigateToCartScreen() {
-        startActivity(CartActivity.newIntent(this))
+        startActivity(CartActivity.newIntent(this),
+            ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
     }
 
     override fun addBurgerToCart(burger: BurgerVO,burgerImageView: ImageView) {

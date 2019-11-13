@@ -26,6 +26,15 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/margin_card_medium_2">
 
+                <TextView
+                    android:id="@+id/tvPlayGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Play Game"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_regular_2x"
+                    android:textColor="@color/iconColor"/>
+
                 <ImageView
                     android:id="@+id/ivCart"
                     android:layout_width="wrap_content"

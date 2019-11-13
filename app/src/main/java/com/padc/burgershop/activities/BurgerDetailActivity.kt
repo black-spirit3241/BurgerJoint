@@ -27,6 +27,7 @@ class BurgerDetailActivity : BaseActivity() ,BurgerDetailView{
     }
 
     private lateinit var mPresenter : BurgerDetailPreserter
+    private var isFavourite=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,8 @@ class BurgerDetailActivity : BaseActivity() ,BurgerDetailView{
         val burgerId = intent.getIntExtra(EXTRA_BURGER_ID, 0)
         mPresenter.onBurgerDetailsUiReady(this, burgerId)
     }
+
+
 
     private fun setUpListeners(){
         ivBurger.setOnClickListener{
@@ -49,6 +52,19 @@ class BurgerDetailActivity : BaseActivity() ,BurgerDetailView{
             animator.repeatCount=3
             animator.duration=900
             fab.startAnimation(animator)
+        }
+
+        btnFavourite.setOnClickListener{
+            if(!isFavourite){
+                btnFavourite.speed=1.0f
+                btnFavourite.playAnimation()
+                isFavourite=true
+            }else{
+                btnFavourite.speed=-4.0f
+                btnFavourite.playAnimation()
+                isFavourite=false
+            }
+
         }
     }
 

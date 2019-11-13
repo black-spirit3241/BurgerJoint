@@ -7,7 +7,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Slide
+import android.view.Gravity
 import android.view.View
+import android.view.Window
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.BounceInterpolator
 import android.view.animation.OvershootInterpolator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -33,12 +37,25 @@ class CartActivity : BaseActivity() , CartView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setUpTransitions()
         setContentView(R.layout.activity_cart)
         setSupportActionBar(toolbar)
         setUpListeners()
         setUpPresenter()
         setUpRecycler()
         mPresenter.onUIReady(this)
+    }
+
+    private fun setUpTransitions(){
+        with(window){
+            requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+            val slideTransition=Slide()
+            slideTransition.slideEdge= Gravity.RIGHT
+            slideTransition.interpolator=AccelerateDecelerateInterpolator()
+            slideTransition.duration=500
+            enterTransition=slideTransition
+            exitTransition= slideTransition
+        }
     }
 
     private fun setUpListeners(){
